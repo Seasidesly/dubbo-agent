@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 @Component
 public class NettyRpcClient {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NettyRpcClient.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(NettyRpcClient.class);
 
     @Resource
     private NettyConnecManager nettyConnecManager;
@@ -24,10 +24,10 @@ public class NettyRpcClient {
     public Object invoke(byte[] msg) throws Exception {
 
         Channel channel = nettyConnecManager.getChannel();
-        LOGGER.info("netty channel :"+channel.toString());
+//        LOGGER.info("netty channel :"+channel.toString());
         byte[] requestIdBytes = Arrays.copyOfRange(msg,4,12);//获取requestId
         long requestId = Bytes.bytes2long(requestIdBytes,0);
-        LOGGER.info("requestId=" + requestId);
+//        LOGGER.info("requestId=" + requestId);
 
         RpcFuture future = new RpcFuture();
         DubboRpcRequestHolder.put(String.valueOf(requestId),future);

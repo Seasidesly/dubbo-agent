@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.nio.ByteBuffer;
 
 public class AgentClientHeartbeatHandler extends SimpleChannelInboundHandler {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AgentClientHeartbeatHandler.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(AgentClientHeartbeatHandler.class);
     private static final  ByteBuffer HEADER = ByteBuffer.allocate(16);
     static {
         // 魔数 da bb
@@ -21,7 +21,7 @@ public class AgentClientHeartbeatHandler extends SimpleChannelInboundHandler {
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
-        LOGGER.info("receive message :"+msg);
+//        LOGGER.info("receive message :"+msg);
     }
 
 }

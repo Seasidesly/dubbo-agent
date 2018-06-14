@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 @RestController
 public class HelloController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HelloController.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(HelloController.class);
 
     @Resource
     private HelloService helloService;
@@ -25,7 +25,7 @@ public class HelloController {
         long startTime = System.currentTimeMillis();
         Object invoke = helloService.invoke(interfaceName, method, parameterTypesString, parameter);
         long endTime = System.currentTimeMillis();
-        LOGGER.info("*********HelloController ...consumer-agent to provider-agent wait time: "+(endTime-startTime)+"ms");
+//        LOGGER.info("*********HelloController ...consumer-agent to provider-agent wait time: "+(endTime-startTime)+"ms");
         return invoke;
     }
 }

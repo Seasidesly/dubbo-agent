@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class NettyServerBusinessThreadPoolUtil {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(NettyServerBusinessThreadPoolUtil.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(NettyServerBusinessThreadPoolUtil.class);
     private static final ExecutorService EXECUTOR = new ThreadPoolExecutor(100,500,1000, TimeUnit.MILLISECONDS,new LinkedBlockingQueue<Runnable>(100000));
 
 
@@ -25,16 +25,16 @@ public class NettyServerBusinessThreadPoolUtil {
             Thread.currentThread().setName("business-thread"+Thread.currentThread().getId());
             byte[] requestIdBytes = Arrays.copyOfRange(msg,4,12);//获取requestId
             long requestId = Bytes.bytes2long(requestIdBytes,0);
-            LOGGER.info("netty server send msg to provider requestId"+requestId);
+//            LOGGER.info("netty server send msg to provider requestId"+requestId);
             try {
                 long startTime = System.currentTimeMillis();
                 Object result = nettyRpcClient.invoke(msg);
                 ctx.writeAndFlush(result);
                 long endTime = System.currentTimeMillis();
-                LOGGER.info("current requestId : "+requestId+" wait time : "+(endTime-startTime)+"ms");
+//                LOGGER.info("current requestId : "+requestId+" wait time : "+(endTime-startTime)+"ms");
             } catch (Exception e) {
                 e.printStackTrace();
-                LOGGER.error("current requestId"+requestId+"happen exception");
+//                LOGGER.error("current requestId"+requestId+"happen exception");
             }
         });
     }

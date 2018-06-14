@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 @Service
 public class HelloServiceImpl implements HelloService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(HelloServiceImpl.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(HelloServiceImpl.class);
 
     @Resource(name = "roundRobinLoadBalance")
     private LoadBalance loadBalance;
@@ -58,15 +58,15 @@ public class HelloServiceImpl implements HelloService {
                     .attachments(JSONObject.parseObject("{\"path\":\""+interfaceName+"\",\"interface\":\""+interfaceName+"\",\"version\":\"0.0.0\"}"))
                     .build(dubboRequest.getRequestId());
             try {
-                LOGGER.info("request send provider agent address: "+sb.toString());
+//                LOGGER.info("request send provider agent address: "+sb.toString());
 //                return agentRpcClient.invoke(sb.toString(),agentProtocolRequest);
                 long startTime = System.currentTimeMillis();
                 Object result = agentRpcClient.invoke(sb.toString(), dubboRequest);
                 long endTime = System.currentTimeMillis();
-                LOGGER.info("**************current request requestId : "+dubboRequest.getRequestId()+"wait time : "+(endTime-startTime)+"****************");
+//                LOGGER.info("**************current request requestId : "+dubboRequest.getRequestId()+"wait time : "+(endTime-startTime)+"****************");
                 return result;
             }catch (Exception e){
-                LOGGER.error("request send provider agent address: "+sb.toString()+"exception :",e);
+//                LOGGER.error("request send provider agent address: "+sb.toString()+"exception :",e);
                 return "request send provider agent address: "+sb.toString()+"exception ";
             }
         }

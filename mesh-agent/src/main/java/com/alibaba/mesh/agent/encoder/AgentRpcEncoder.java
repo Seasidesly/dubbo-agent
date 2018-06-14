@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AgentRpcEncoder extends MessageToByteEncoder<DubboProtocolRequest>{
-    private static final Logger LOGGER = LoggerFactory.getLogger(AgentRpcEncoder.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(AgentRpcEncoder.class);
     private static final int HEADER_LENGTH = 16;
 
     @Override
@@ -18,7 +18,7 @@ public class AgentRpcEncoder extends MessageToByteEncoder<DubboProtocolRequest>{
         buffer.writeBytes(req.getHeader().array()); // 写入header部分
         buffer.writerIndex(savedWriteIndex+HEADER_LENGTH);//标记body写入buffer的位置为开始获取buffer的写入位置+header的长度定长16
         //心跳包发送不需要发送body数据
-        LOGGER.info("requestId: "+req.getRequestId());
+//        LOGGER.info("requestId: "+req.getRequestId());
         byte[] body = req.getRpcBody().getBytes();
         buffer.writeBytes(body);//写入body数据
         buffer.writerIndex(savedWriteIndex+HEADER_LENGTH+body.length);//设置buffer的可以写入位置

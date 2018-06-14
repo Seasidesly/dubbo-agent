@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 public class NettyClientBusinessThreadPoolUtil {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(NettyClientBusinessThreadPoolUtil.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(NettyClientBusinessThreadPoolUtil.class);
 
     private static final ExecutorService EXECUTOR = new ThreadPoolExecutor(100,500,1000, TimeUnit.MILLISECONDS,new LinkedBlockingQueue<Runnable>(100000));
 
@@ -33,7 +33,7 @@ public class NettyClientBusinessThreadPoolUtil {
             buffer.writeBytes(req.getHeader().array()); // 写入header部分
             buffer.writerIndex(savedWriteIndex+ Constant.HEADER_LENGTH);//标记body写入buffer的位置为开始获取buffer的写入位置+header的长度定长16
             //心跳包发送不需要发送body数据
-            LOGGER.info("requestId: "+req.getRequestId());
+//            LOGGER.info("requestId: "+req.getRequestId());
             byte[] body = req.getRpcBody().getBytes();
             buffer.writeBytes(body);//写入body数据
             buffer.writerIndex(savedWriteIndex+Constant.HEADER_LENGTH+body.length);//设置buffer的可以写入位置
@@ -48,7 +48,7 @@ public class NettyClientBusinessThreadPoolUtil {
             try {
                 do {
                     int savedReaderIndex = byteBuf.readerIndex();
-                    LOGGER.info("byteBuf readable position "+savedReaderIndex);
+//                    LOGGER.info("byteBuf readable position "+savedReaderIndex);
                     Object msg = null;
                     try {
                         msg = decode2(byteBuf);
@@ -75,7 +75,7 @@ public class NettyClientBusinessThreadPoolUtil {
         int readable = byteBuf.readableBytes();
 
         if (readable < Constant.HEADER_LENGTH) {
-            LOGGER.info("byteBuf readable limit < request header length");
+//            LOGGER.info("byteBuf readable limit < request header length");
             return DecodeResult.NEED_MORE_INPUT;
         }
 
@@ -97,7 +97,7 @@ public class NettyClientBusinessThreadPoolUtil {
         byte[] subArray = Arrays.copyOfRange(data,Constant.HEADER_LENGTH + 3, data.length -2 );
 
         String s = new String(subArray);
-        LOGGER.info("provider return result :"+ s );
+//        LOGGER.info("provider return result :"+ s );
 
         byte[] requestIdBytes = Arrays.copyOfRange(data,4,12);
         long requestId = Bytes.bytes2long(requestIdBytes,0);

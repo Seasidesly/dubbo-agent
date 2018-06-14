@@ -8,7 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DubboRpcEncoder extends MessageToByteEncoder {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DubboRpcEncoder.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(DubboRpcEncoder.class);
     // header length.
     protected static final int HEADER_LENGTH = 16;
 
@@ -19,7 +19,7 @@ public class DubboRpcEncoder extends MessageToByteEncoder {
         buffer.writerIndex(savedWriteIndex);//标记buffer从什么位置开始写入数据
         buffer.writeBytes(req.getHeader().array()); // 写入header部分
 
-        LOGGER.info("requestId: "+req.getRequestId());
+//        LOGGER.info("requestId: "+req.getRequestId());
         byte[] body = req.getRpcBody().getBytes();
         buffer.writerIndex(savedWriteIndex+HEADER_LENGTH);//标记body写入buffer的位置为开始获取buffer的写入位置+header的长度定长16
         buffer.writeBytes(body);//写入body数据

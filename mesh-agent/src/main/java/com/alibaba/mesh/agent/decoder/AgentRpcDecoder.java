@@ -13,14 +13,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AgentRpcDecoder extends ByteToMessageDecoder {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AgentRpcDecoder.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(AgentRpcDecoder.class);
     private static final int HEADER_LENGTH = 16;//header 固定长度
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf byteBuf, List<Object> out) throws Exception {
         try {
             do {
                 int savedReaderIndex = byteBuf.readerIndex();
-                LOGGER.info("AgentRpcDecoder byteBuf readable position "+savedReaderIndex);
+//                LOGGER.info("AgentRpcDecoder byteBuf readable position "+savedReaderIndex);
                 Object msg = null;
                 try {
                     msg = decode2(byteBuf);
@@ -47,7 +47,7 @@ public class AgentRpcDecoder extends ByteToMessageDecoder {
         int readable = byteBuf.readableBytes();
 
         if (readable < HEADER_LENGTH) {
-            LOGGER.info("byteBuf readable limit < request header length");
+//            LOGGER.info("byteBuf readable limit < request header length");
             return DecodeResult.NEED_MORE_INPUT;
         }
 
@@ -69,7 +69,7 @@ public class AgentRpcDecoder extends ByteToMessageDecoder {
         byte[] subArray = Arrays.copyOfRange(data,HEADER_LENGTH + 2, data.length -1 );
 
         String s = new String(subArray);
-        LOGGER.info("provider return result :"+ s );
+//        LOGGER.info("provider return result :"+ s );
 
         byte[] requestIdBytes = Arrays.copyOfRange(data,4,12);
         long requestId = Bytes.bytes2long(requestIdBytes,0);

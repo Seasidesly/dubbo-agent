@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DubboToAgentRpcDecoder extends ByteToMessageDecoder {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DubboToAgentRpcDecoder.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(DubboToAgentRpcDecoder.class);
     // header length.
     protected static final int HEADER_LENGTH = 16;
 
@@ -23,7 +23,7 @@ public class DubboToAgentRpcDecoder extends ByteToMessageDecoder {
         try {
             do {
                 int savedReaderIndex = byteBuf.readerIndex();
-                LOGGER.info("byteBuffer readable position: "+savedReaderIndex);
+//                LOGGER.info("byteBuffer readable position: "+savedReaderIndex);
                 Object msg = null;
                 try {
                     msg = decode2(byteBuf);
@@ -56,7 +56,7 @@ public class DubboToAgentRpcDecoder extends ByteToMessageDecoder {
 
         int savedReaderIndex = byteBuf.readerIndex();
         int readable = byteBuf.readableBytes();
-        LOGGER.info("byteBuffer readable limit :"+readable);
+//        LOGGER.info("byteBuffer readable limit :"+readable);
         if (readable < HEADER_LENGTH) {
             return DecodeResult.NEED_MORE_INPUT;
         }

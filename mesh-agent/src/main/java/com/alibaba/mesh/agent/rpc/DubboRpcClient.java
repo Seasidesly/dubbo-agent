@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 
 @Component
 public class DubboRpcClient {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DubboRpcClient.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(DubboRpcClient.class);
 
     @Resource
     private DubboConnecManager connectManager;
@@ -24,7 +24,7 @@ public class DubboRpcClient {
     public Object invoke(String interfaceName, String method, String parameterTypesString, String parameter) throws Exception {
 
         Channel channel = connectManager.getChannel();
-        LOGGER.info("netty channel :"+channel.toString());
+//        LOGGER.info("netty channel :"+channel.toString());
 
         DubboProtocolRequest dubboRequest = new DubboProtocolRequest();
 
@@ -37,7 +37,7 @@ public class DubboRpcClient {
                 .attachments(JSONObject.parseObject("{\"path\":\""+interfaceName+"\",\"interface\":\""+interfaceName+"\",\"version\":\"0.0.0\"}"))
                 .build(dubboRequest.getRequestId());
 
-        LOGGER.info("requestId=" + dubboRequest.getRequestId());
+//        LOGGER.info("requestId=" + dubboRequest.getRequestId());
 
         RpcFuture future = new RpcFuture();
         DubboRpcRequestHolder.put(String.valueOf(dubboRequest.getRequestId()),future);
@@ -58,7 +58,7 @@ public class DubboRpcClient {
 
     public Object invoke(AgentProtocolRequest agentProtocolRequest) throws Exception {
         Channel channel = connectManager.getChannel();
-        LOGGER.info("netty channel :"+channel.toString());
+//        LOGGER.info("netty channel :"+channel.toString());
         String interfaceName =agentProtocolRequest.getPath();
 
         DubboProtocolRequest dubboRequest = new DubboProtocolRequest();
@@ -73,7 +73,7 @@ public class DubboRpcClient {
                 .setRequestId(agentProtocolRequest.getRequestId())
                 .build(dubboRequest.getRequestId());
 
-        LOGGER.info("requestId=" + dubboRequest.getRequestId());
+//        LOGGER.info("requestId=" + dubboRequest.getRequestId());
 
         RpcFuture future = new RpcFuture();
         DubboRpcRequestHolder.put(String.valueOf(dubboRequest.getRequestId()),future);

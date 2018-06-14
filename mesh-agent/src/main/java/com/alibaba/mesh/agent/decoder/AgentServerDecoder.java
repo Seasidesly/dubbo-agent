@@ -13,7 +13,7 @@ import java.util.List;
 
 public class AgentServerDecoder extends ByteToMessageDecoder {
     private static final int HEADER_LENGTH = 16;
-    private static final Logger LOGGER = LoggerFactory.getLogger(AgentServerDecoder.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(AgentServerDecoder.class);
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf buffer, List<Object> out) throws Exception {
@@ -21,7 +21,7 @@ public class AgentServerDecoder extends ByteToMessageDecoder {
             do {
                 int saveReaderIndex = buffer.readerIndex();
                 Object msg = null;
-                LOGGER.info("*******AgentServerDecoder decode msg*********************");
+//                LOGGER.info("*******AgentServerDecoder decode msg*********************");
                 try {
                     msg = decode2(buffer);
                 } catch (Exception e) {
@@ -48,7 +48,7 @@ public class AgentServerDecoder extends ByteToMessageDecoder {
         if (readable < HEADER_LENGTH) {
             return DecodeResult.NEED_MORE_INPUT;
         }
-        LOGGER.info("*******************decode2 agent client send msg*************");
+//        LOGGER.info("*******************decode2 agent client send msg*************");
         byte[] header = new byte[HEADER_LENGTH];
         byteBuf.readBytes(header);
         byte[] dataLen = Arrays.copyOfRange(header,12,16);

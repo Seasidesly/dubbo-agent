@@ -14,7 +14,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class NettyClientThreadPoolUtil {
-    private static final Logger LOGGER = LoggerFactory.getLogger(NettyClientThreadPoolUtil.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(NettyClientThreadPoolUtil.class);
     private static final ExecutorService EXECUTOR = new ThreadPoolExecutor(100,500,1000, TimeUnit.MILLISECONDS,new LinkedBlockingQueue<Runnable>(100000));
 
     public static void dubboRpcClientHandler(ChannelHandlerContext channelHandlerContext, RpcResponse response){
